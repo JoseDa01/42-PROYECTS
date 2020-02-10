@@ -5,10 +5,10 @@
 
 int main()
 {
-    char *b = "hola";
+    char *b = NULL;
     printf("-----------------\n");
-    printf("%12s\n", b);
-    ft_printf("%12s\n", b);
+    printf("%s\n", b);
+    ft_printf("hello, %s.\n", b);
     printf("-----------------\n");
 }
 

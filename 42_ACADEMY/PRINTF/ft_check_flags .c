@@ -6,7 +6,7 @@
 /*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 17:15:21 by jtello-m          #+#    #+#             */
-/*   Updated: 2020/01/30 17:47:31 by jtello-m         ###   ########.fr       */
+/*   Updated: 2020/02/10 20:21:21 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,17 @@ int		ft_check_flags(const char *str, t_var *count)
 		count->flagp = 1;
 	else if (str[count->i] == '*')
 		count->flags = 1;
-	else if (str[count->i] >= '0' && str[count->i] <= '9')
+	else if (str[count->i] > '0' && str[count->i] <= '9')
 	{
 		count->nflags = 1;
-		count->nbr = ft_atoi(str + 1, count);
-		if (!(count->large == 1))
-			count->i += count->large;
+		count->nbr = ft_atoi(str + count->i, count);
+		//if (count->large == 0 || count->large == 1)
+		count->i += (count->large - 1);
+		if (count->nbr < 0)
+		{
+			count->nbr = (count->nbr * (-1));
+			count->i++;
+		}
 	}
 	else
 		return (0);

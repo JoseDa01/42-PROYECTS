@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_char.c                                          :+:      :+:    :+:   */
+/*   ft_ptr.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/21 17:09:00 by jtello-m          #+#    #+#             */
-/*   Updated: 2020/02/09 19:32:13 by jtello-m         ###   ########.fr       */
+/*   Created: 2020/02/09 21:17:37 by jtello-m          #+#    #+#             */
+/*   Updated: 2020/02/10 16:26:54 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-void	ft_char(t_var *count)
+void	ft_ptr(t_var *count)
 {
-	write(1, &count->a, 1);
-	count->chcount++;
+	count->p = "hola";
+	//hacer un itoa, para coger el valor de la dirrecion de memoria que esta en hex
 }
 
-void    ft_args_c(t_var *count, va_list fa)
+void	ft_args_ptr(const char *str, t_var *count, va_list fa)
 {
-	count->a = (char)va_arg(fa, void *);
-	ft_char(count);
+	count->p = (char *)va_arg(fa, void *);
+	count->tam = strlen(count->s);
+	ft_app_flags(str, count);
+	ft_str(count);
 }
