@@ -6,7 +6,7 @@
 /*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:17:15 by jtello-m          #+#    #+#             */
-/*   Updated: 2020/02/10 20:48:57 by jtello-m         ###   ########.fr       */
+/*   Updated: 2020/02/11 20:52:06 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_prec_str(t_var *count)
 	i = 0;
 	if (count->s != NULL)
 	{
-		while (i <= count->nbr - 1) 
+		while (i <= count->nbrp - 1) 
 		{
 			write(1, &count->s[i], 1);
 			i++;
@@ -59,7 +59,7 @@ void	ft_prec_str(t_var *count)
 	else
 	{
 		//loop hasta el prec
-		while (i <= count->nbr - 1)
+		while (i <= count->nbrp - 1)
 		{
 			write(1, &n[i], 1);
 			i++;
@@ -74,10 +74,15 @@ void	ft_prec_str(t_var *count)
 void	ft_args_str(const char *str, t_var *count, va_list fa)
 {
 	count->s = (char *)va_arg(fa, void *);
-	count->tam = strlen(count->s);
+	if (count->s != NULL)
+		count->tam = strlen(count->s);
+	else
+		count->tam = 6;
+	if (count->flagp == 1 && count->nflags == 1 && count->tam >=  count->nbrp)
+		count->tam = count->nbrp;
 	ft_app_flags(str, count);
-	if (count->flagp == 1 && (count->tam >= count->nbr))
+	if (count->flagp == 1 && (count->tam >= count->nbrp))
 		ft_prec_str(count);
-	else if (count->flagp == 0 || count->tam <= count->nbr)
+	else if (count->flagp == 0 || count->tam <= count->nbrp)
 		ft_str(count);
 }

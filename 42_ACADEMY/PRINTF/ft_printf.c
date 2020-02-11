@@ -6,7 +6,7 @@
 /*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 16:25:04 by jtello-m          #+#    #+#             */
-/*   Updated: 2020/02/10 19:42:54 by jtello-m         ###   ########.fr       */
+/*   Updated: 2020/02/11 21:25:56 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,22 +61,23 @@ void	ft_format(const char *str, t_var *count, va_list fa)
 	{
 		ft_args_c(count, fa);
 	}
-	else if (str[count->i + 1] == 'p')
+	else if (str[count->i] == 'p')
 	{
 		ft_args_ptr(str, count, fa);
 	}
+	else if (str[count->i] == 'd' || str[count->i] == 'i')
+	{
+		ft_args_int(str, count, fa);
+	}
+	else if (str[count->i] == '%')
+	{
+		//funcion de %
+		write(1, "%", 1);
+	}
 }
 /*
-	else if (str[count.i + 1] == 'd' || str[count.i + 1] == 'i')
-	{
-		ft_int();
-	}
 	else if (str[count.i + 1] == 'x' || str[count.i + 1] == 'X')
 	{
 		ft_hex();
-	}
-	else (str[count.i + 1] == '%')
-	{
-		write(1, "%", 1);
 	}
 }*/
