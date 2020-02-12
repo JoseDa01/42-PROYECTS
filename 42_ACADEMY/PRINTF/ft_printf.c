@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 16:25:04 by jtello-m          #+#    #+#             */
-/*   Updated: 2020/02/11 21:25:56 by jtello-m         ###   ########.fr       */
+/*   Updated: 2020/02/12 02:28:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,20 @@ void	ft_format(const char *str, t_var *count, va_list fa)
 	{
 		ft_args_int(str, count, fa);
 	}
+	else if (str[count->i] == 'x' || str[count->i] == 'X')
+	{
+		ft_args_hex(str, count, fa);
+	}
 	else if (str[count->i] == '%')
 	{
 		//funcion de %
 		write(1, "%", 1);
 	}
 }
+
 /*
-	else if (str[count.i + 1] == 'x' || str[count.i + 1] == 'X')
+else if (str[count->i] == 'u')
 	{
-		ft_hex();
+		ft_args_u(str, count, fa);
 	}
-}*/
+*/
