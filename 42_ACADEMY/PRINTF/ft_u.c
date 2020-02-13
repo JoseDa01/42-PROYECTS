@@ -1,31 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_char.c                                          :+:      :+:    :+:   */
+/*   ft_u.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/21 17:09:00 by jtello-m          #+#    #+#             */
-/*   Updated: 2020/02/13 16:05:06 by jtello-m         ###   ########.fr       */
+/*   Created: 2020/02/13 17:01:54 by jtello-m          #+#    #+#             */
+/*   Updated: 2020/02/13 17:56:48 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-void	ft_char(t_var *count)
+void	ft_u(const char *u_str, t_var *count)
 {
-	write(1, &count->a, 1);
-	count->chcount++;
+	int i;
+
+	i = 0;
+	while (u_str[i] != '\0')
+	{
+		write(1, &u_str[i], 1);
+		i++;
+		count->chcount++;
+	}
 	if (count->flagm == 1)
 		ft_flag_minus(count);
 }
 
-void    ft_args_c(char const *str, t_var *count, va_list fa)
+void	ft_args_u(const char *str, t_var *count, va_list fa)
 {
-	count->a = (char)va_arg(fa, void *);
-	count->tam = strlen(&count->a);
-	if (!(count->a))
-		count->tam += 1;
+	(void)str;
+	count->u = (unsigned int)va_arg(fa, void *);
+	count->u_str = ft_itoa_u(count->u);
+	count->tam = strlen(count->u_str);
 	ft_app_flags(str, count);
-	ft_char(count);
+	ft_u(count->u_str, count);
 }

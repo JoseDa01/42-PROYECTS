@@ -6,7 +6,7 @@
 /*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 17:15:21 by jtello-m          #+#    #+#             */
-/*   Updated: 2020/02/11 20:06:56 by jtello-m         ###   ########.fr       */
+/*   Updated: 2020/02/13 14:11:50 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,10 @@ int		ft_check_flags(const char *str, t_var *count)
 {
 	if (str[count->i] == '-')
 		count->flagm = 1;
-		//if (str[count->i + 1] == '0')
-		//	count->i += 2;
 	else if (str[count->i] == '0')
 		count->flag0 = 1;
 	else if (str[count->i] == '.')
 		count->flagp = 1;
-		//if (str[count->i + 1] == '0')
-		//	count->i += 2;
 	else if (str[count->i] == '*')
 		count->flags = 1;
 	else if (str[count->i] > '0' && str[count->i] <= '9')
@@ -35,7 +31,7 @@ int		ft_check_flags(const char *str, t_var *count)
 
 void	assig_nbr(const char *str, t_var *count)
 {
-	if (str[count->i - 1] == '-')
+	if (str[count->i - 1] == '-'|| str[count->i - 2] == '-')
 	{
 		count->nbrm = ft_atoi(str + count->i, count);
 		//if (count->large == 0 || count->large == 1)
@@ -57,7 +53,7 @@ void	assig_nbr(const char *str, t_var *count)
 			count->i++;
 		}
 	}
-	else if (str[count->i - 1] == '.')
+	else if (str[count->i - 1] == '.' || str[count->i - 2] == '.')
 	{
 		count->nbrp = ft_atoi(str + count->i, count);
 		//if (count->large == 0 || count->large == 1)

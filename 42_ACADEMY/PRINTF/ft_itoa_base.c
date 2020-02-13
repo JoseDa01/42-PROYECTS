@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 16:08:03 by jtello-m          #+#    #+#             */
-/*   Updated: 2020/02/12 02:24:56 by marvin           ###   ########.fr       */
+/*   Updated: 2020/02/12 17:58:01 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,15 @@ int		ft_abs(int nb)
 	return (nb);
 }
 
-char	*ft_itoa_base(int nbr, int base)
+char	*ft_itoa_base(int nbr, int base, char *tab)
 {
 	char	*str;
 	int		size;
-	char	*tab;
 	int		flag;
 	int		tmp;
 	
 	flag = 0;
 	size = 0;
-	tab = "0123456789ABCDEF";
 	if (base < 2 || base > 16)
 		return (0);
 	if (nbr < 0 && base == 10)
@@ -50,12 +48,4 @@ char	*ft_itoa_base(int nbr, int base)
 		nbr /=base;
 	}
 	return (str);
-}
-
-int main()
-{
-	ft_itoa_base(15, 16);
-	//mirarse que hace exactamente la u;
-	printf("%u", 544);
-	return (0);
 }

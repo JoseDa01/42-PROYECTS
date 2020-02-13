@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_struc_reset.c                                   :+:      :+:    :+:   */
+/*   ft_pct.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/23 17:07:44 by jtello-m          #+#    #+#             */
-/*   Updated: 2020/02/13 21:37:50 by jtello-m         ###   ########.fr       */
+/*   Created: 2020/02/13 16:41:24 by jtello-m          #+#    #+#             */
+/*   Updated: 2020/02/13 16:48:06 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-void	ft_struc_reset(t_var *count)
+void    ft_pct(t_var *count)
 {
-    count->flag0 = 0;
-	count->flagm = 0;
-	count->flagp = 0; 
-	count->flags = 0;
-	count->nflags = 0;
-	count->flag_is_negative = 0;
-	count->nbr = 0;
-	count->nbrm = 0;
-	count->nbr0 = 0;
-	count->nbrp = 0;
-	count->large = 0;
-	count->tam = 0;
-	count->tam_p = 0;
-	count->j = 1;
-	count->n = 0;
-	count->u = 0;
-	count->hex_str = 0;
+    write(1, "%", 1);
+    count->chcount++;
+	if (count->flagm == 1)
+		ft_flag_minus(count);
+}
+
+void	ft_args_pct(const char *str, t_var *count)
+{
+    count->tam = 1;
+    ft_app_flags(str, count);
+    ft_pct(count);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 16:25:04 by jtello-m          #+#    #+#             */
-/*   Updated: 2020/02/12 02:28:24 by marvin           ###   ########.fr       */
+/*   Updated: 2020/02/13 22:04:08 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,42 +47,23 @@ void	ft_flags(const char *str, t_var *count, va_list fa)
 	{
 		count->i++;
 	}
-	//ft_app_flags(str, count);
 	ft_format(str, count, fa);
 }
 
 void	ft_format(const char *str, t_var *count, va_list fa)
 {
 	if (str[count->i] == 's')
-	{
 		ft_args_str(str, count, fa);
-	}
 	else if (str[count->i] == 'c')
-	{
-		ft_args_c(count, fa);
-	}
+		ft_args_c(str, count, fa);
 	else if (str[count->i] == 'p')
-	{
 		ft_args_ptr(str, count, fa);
-	}
 	else if (str[count->i] == 'd' || str[count->i] == 'i')
-	{
 		ft_args_int(str, count, fa);
-	}
 	else if (str[count->i] == 'x' || str[count->i] == 'X')
-	{
 		ft_args_hex(str, count, fa);
-	}
 	else if (str[count->i] == '%')
-	{
-		//funcion de %
-		write(1, "%", 1);
-	}
-}
-
-/*
-else if (str[count->i] == 'u')
-	{
+		ft_args_pct(str, count);
+	else if (str[count->i] == 'u')
 		ft_args_u(str, count, fa);
-	}
-*/
+}

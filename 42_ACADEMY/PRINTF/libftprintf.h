@@ -1,0 +1,82 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libftprintf.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/12/17 16:46:56 by jtello-m          #+#    #+#             */
+/*   Updated: 2020/02/13 21:37:34 by jtello-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef LIBFTPRINTF_H
+# define LIBFTPRINTF_H
+
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <unistd.h>
+# include <stdarg.h>
+# include "libft/libft.h"
+typedef	struct	s_var
+{
+	int i; //contador del main str
+	int j;
+	int chcount;
+	int flag0;
+	int flagm;
+	int flagp; 
+	int flags;
+	int nflags;
+	int flag_is_negative;
+	int nbr;
+	int nbrm;
+	int nbr0;
+	int nbrp;
+	int large;
+	int tam;
+	int tam_p;
+	char a;
+	char *s;
+	int n;
+	int p; //pruebas
+	char *p_str;
+	char *n_str;
+	char *hex_str;
+	unsigned int u;
+	char *u_str;
+	unsigned long hex;
+}				t_var;
+
+
+int				ft_printf(const char *str, ...);
+void			ft_flags(const char *str, t_var *count, va_list fa);
+void			ft_format(const char *str, t_var *count, va_list fa);
+void			ft_flags(const char *str, t_var *count, va_list fa);
+int				ft_check_flags(const char *str, t_var *count);
+void			assig_nbr(const char *str, t_var *count);
+void			ft_app_flags(const char *str, t_var *count);
+void			ft_flag_minus(t_var *count);
+void			ft_ptr(t_var *count);
+void			ft_args_ptr(const char *str, t_var *count, va_list fa);
+void			ft_str(t_var *count);
+void			ft_prec_str(t_var *count);
+void			ft_args_str(const char *str, t_var *count, va_list fa);
+void			ft_char(t_var *count);
+void			ft_args_c(char const *str, t_var *count, va_list fa);
+void			ft_int(char *str_int, t_var *count);
+void			ft_args_int(const char *str, t_var *count, va_list fa);
+void			ft_hex(char *str, t_var *count);
+void			ft_args_hex(const char *str, t_var *count, va_list fa);
+void			ft_pct(t_var *count);
+void			ft_args_pct(const char *str, t_var *count);
+void			ft_u(const char *u_str, t_var *count);
+void			ft_args_u(const char *str, t_var *count, va_list fa);
+void			ft_struc_init(t_var *count);
+void			ft_struc_reset(t_var *count);
+int				ft_atoi(const char *str, t_var *count);
+char			*ft_itoa(int n);
+char			*ft_itoa_u(unsigned int n);
+char			*ft_itoa_base(int nbr, int base, char *tab);
+#endif

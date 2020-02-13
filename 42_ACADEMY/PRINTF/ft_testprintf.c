@@ -5,11 +5,12 @@
 
 int main()
 {
-    int a = 1;
-    //char *b = "yolo";
+    //int a = 15;
+    int b = 3421;
+
     printf("-----------------\n");
-    printf("%i\n", a);
-    ft_printf("%i\n", a);
+    printf("%05k\n");
+    ft_printf("%10.3i\n", b);
     printf("-----------------\n");
 }
 

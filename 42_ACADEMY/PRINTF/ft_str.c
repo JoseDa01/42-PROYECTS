@@ -6,7 +6,7 @@
 /*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:17:15 by jtello-m          #+#    #+#             */
-/*   Updated: 2020/02/11 20:52:06 by jtello-m         ###   ########.fr       */
+/*   Updated: 2020/02/12 20:23:30 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	ft_prec_str(t_var *count)
 			write(1, &n[i], 1);
 			i++;
 		}
-		count->chcount += (count->nbr - 1);
+		count->chcount += (count->nbrp);
 		count->s = NULL;
 		if (count->flagm == 1)
 			ft_flag_minus(count);
@@ -78,8 +78,10 @@ void	ft_args_str(const char *str, t_var *count, va_list fa)
 		count->tam = strlen(count->s);
 	else
 		count->tam = 6;
-	if (count->flagp == 1 && count->nflags == 1 && count->tam >=  count->nbrp)
+	if (count->flagp == 1 && count->tam >= count->nbrp)
 		count->tam = count->nbrp;
+	if (count->flagm == 1 && count->tam >= count->nbrm)
+		count->tam = count->nbrm;
 	ft_app_flags(str, count);
 	if (count->flagp == 1 && (count->tam >= count->nbrp))
 		ft_prec_str(count);
