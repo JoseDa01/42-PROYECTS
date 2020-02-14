@@ -6,7 +6,7 @@
 /*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 17:15:31 by jtello-m          #+#    #+#             */
-/*   Updated: 2020/02/13 21:55:50 by jtello-m         ###   ########.fr       */
+/*   Updated: 2020/02/14 20:22:14 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ft_app_flags(const char *str, t_var *count)
 	(void)str;
 	if (count->flag0 == 1 && count->flagp == 0)
 	{
+		if (count->flag_is_negative == 1 && count->flagp == 0)
+			write(1, "-", 1);
 		while (count->j <= (count->nbr0 - count->tam))
 		{
 			count->j++;
@@ -26,6 +28,8 @@ void	ft_app_flags(const char *str, t_var *count)
 	}
 	if (count->nflags == 1)
 	{
+		if (count->flag_is_negative == 1 && count->flagp == 0)
+			write(1, "-", 1);
 		while (count->j <= (count->nbr - count->tam))
 		{
 			count->j++;

@@ -15,8 +15,19 @@
 void	ft_hex(char *str, t_var *count)
 {
 	int i;
+	int j;
 
+	j = 1;
 	i = 0;
+	if (count->flagp == 1 && count->nbrp > count->tam)
+	{
+		while (j <= count->nbrp - count->tam)
+		{
+			write(1, "0", 1);
+			j++;
+			count->chcount++;
+		}
+	}
 	while (str[i] != '\0')
 	{
 		write(1, &str[i], 1);
@@ -35,11 +46,11 @@ void	ft_args_hex(const char *str, t_var *count, va_list fa)
 		count->hex_str = ft_itoa_base(count->hex, 16, "0123456789abcdef");
 	if (str[count->i] == 'X')
 		count->hex_str = ft_itoa_base(count->hex, 16, "0123456789ABCDEF");
-	count->tam = strlen(count->hex_str);
+	count->tam = ft_strlen1(count->hex_str);
 	if (count->flagp == 1 && count->tam >= count->nbrp)
 		count->tam = count->nbrp;
 	if (count->flagm == 1 && count->tam >= count->nbrm)
 		count->tam = count->nbrm;
 	ft_app_flags(str, count);
-	ft_int(count->hex_str, count);
+	ft_hex(count->hex_str, count);
 }

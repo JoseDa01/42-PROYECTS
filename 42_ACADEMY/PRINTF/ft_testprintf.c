@@ -6,11 +6,11 @@
 int main()
 {
     //int a = 15;
-    int b = 3421;
+    //int b = 8375;
 
     printf("-----------------\n");
-    printf("%05k\n");
-    ft_printf("%10.3i\n", b);
+    printf("%-8.5da\n", 34);
+    ft_printf("%-8.5da\n", 34);
     printf("-----------------\n");
 }
 

@@ -6,7 +6,7 @@
 /*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 16:08:03 by jtello-m          #+#    #+#             */
-/*   Updated: 2020/02/12 17:58:01 by jtello-m         ###   ########.fr       */
+/*   Updated: 2020/02/14 19:43:42 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ int		ft_abs(int nb)
 	return (nb);
 }
 
-char	*ft_itoa_base(int nbr, int base, char *tab)
+char	*ft_itoa_base(unsigned long nbr, int base, char *tab)
 {
-	char	*str;
-	int		size;
-	int		flag;
-	int		tmp;
+	char				*str;
+	int					size;
+	int					flag;
+	unsigned long		tmp;
 	
 	flag = 0;
 	size = 0;

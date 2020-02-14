@@ -6,7 +6,7 @@
 /*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:17:15 by jtello-m          #+#    #+#             */
-/*   Updated: 2020/02/12 20:23:30 by jtello-m         ###   ########.fr       */
+/*   Updated: 2020/02/14 21:26:17 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	ft_prec_str(t_var *count)
 	}
 	else
 	{
-		//loop hasta el prec
 		while (i <= count->nbrp - 1)
 		{
 			write(1, &n[i], 1);
@@ -75,7 +74,7 @@ void	ft_args_str(const char *str, t_var *count, va_list fa)
 {
 	count->s = (char *)va_arg(fa, void *);
 	if (count->s != NULL)
-		count->tam = strlen(count->s);
+		count->tam = ft_strlen1(count->s);
 	else
 		count->tam = 6;
 	if (count->flagp == 1 && count->tam >= count->nbrp)
