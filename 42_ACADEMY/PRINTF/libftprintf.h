@@ -6,7 +6,7 @@
 /*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 16:46:56 by jtello-m          #+#    #+#             */
-/*   Updated: 2020/02/13 21:37:34 by jtello-m         ###   ########.fr       */
+/*   Updated: 2020/02/17 20:22:46 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,12 @@ int				ft_printf(const char *str, ...);
 void			ft_flags(const char *str, t_var *count, va_list fa);
 void			ft_format(const char *str, t_var *count, va_list fa);
 void			ft_flags(const char *str, t_var *count, va_list fa);
-int				ft_check_flags(const char *str, t_var *count);
+int				ft_check_flags(const char *str, t_var *count, va_list fa);
 void			assig_nbr(const char *str, t_var *count);
+void			ft_starflag(const char *str, t_var *count, va_list fa);
 void			ft_app_flags(const char *str, t_var *count);
 void			ft_flag_minus(t_var *count);
-void			ft_ptr(t_var *count);
+void			ft_ptr(const char *p_str, t_var *count);
 void			ft_args_ptr(const char *str, t_var *count, va_list fa);
 void			ft_str(t_var *count);
 void			ft_prec_str(t_var *count);
@@ -67,7 +68,7 @@ void			ft_char(t_var *count);
 void			ft_args_c(char const *str, t_var *count, va_list fa);
 void			ft_int(char *str_int, t_var *count);
 void			ft_args_int(const char *str, t_var *count, va_list fa);
-void			ft_hex(char *str, t_var *count);
+void			ft_hex(const char *hex_str, t_var *count);
 void			ft_args_hex(const char *str, t_var *count, va_list fa);
 void			ft_pct(t_var *count);
 void			ft_args_pct(const char *str, t_var *count);

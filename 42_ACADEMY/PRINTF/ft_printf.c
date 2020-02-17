@@ -6,7 +6,7 @@
 /*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 16:25:04 by jtello-m          #+#    #+#             */
-/*   Updated: 2020/02/14 19:59:50 by jtello-m         ###   ########.fr       */
+/*   Updated: 2020/02/17 20:22:18 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		ft_printf(const char *str, ...)
 
 void	ft_flags(const char *str, t_var *count, va_list fa)
 {
-	while (ft_check_flags(str, count))
+	while (ft_check_flags(str, count, fa))
 	{
 		count->i++;
 	}

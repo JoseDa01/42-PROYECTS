@@ -6,7 +6,7 @@
 /*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 21:00:35 by jtello-m          #+#    #+#             */
-/*   Updated: 2020/02/14 21:35:16 by jtello-m         ###   ########.fr       */
+/*   Updated: 2020/02/17 19:48:47 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	ft_int(char *n_str, t_var *count)
 			count->chcount++;
 		}
 	}
+	if (count->flag_is_negative == 1 && count->flagp == 1 && count->tam > count->nbrp)
+		write(1, "-", 1);
 	while (n_str[i] != '\0')
 	{
 		if (count->flagp == 1 && count->nbrp == 0)
@@ -55,6 +57,12 @@ void	ft_int(char *n_str, t_var *count)
 
 void	ft_args_int(const char *str, t_var *count, va_list fa)
 {
+	if (count->flag0 == 1 && count->flagp == 1)
+	{
+		count->nflags = 1;
+		count->nbr = count->nbr0;
+		count->flag0 = 0;
+	}
 	count->n = (int)va_arg(fa, void *);
 	if (count->n < 0 && (count->flag0 == 1 || count->flagp == 1))
 	{
@@ -67,12 +75,19 @@ void	ft_args_int(const char *str, t_var *count, va_list fa)
 	count->tam_p = count->tam;
 	if (count->flagp == 1 && count->tam <= count->nbrp)
 		count->tam = count->nbrp;
-	if (count->flagm == 1 && count->tam >= count->nbrm)
-		count->tam = count->nbrm;
 	if (count->flag0 == 1 && count->flag_is_negative == 1)
 		count->tam += 1;
 	if (count->nflags == 1 && count->flagp == 1 && count->tam <= count->nbrp)
 		count->tam = count->nbrp;
+	if (count->flag_is_negative == 1)
+	{
+			count->nbr -= 1;
+			count->nbrm -= 1;
+	}
+	if (count->flagp == 1 && count->nbrp == 0)
+	{
+			count->tam = 0;
+	}
 	ft_app_flags(str, count);
 	ft_int(count->n_str, count);
 }

@@ -6,11 +6,12 @@
 int main()
 {
     //int a = 15;
-    //int b = 8375;
+    int b = -54;
+    int s = -7;
 
     printf("-----------------\n");
-    printf("%-8.5da\n", 34);
-    ft_printf("%-8.5da\n", 34);
+    printf("%0*i|\n", s, b);
+    ft_printf("%0*i|\n", s, b);
     printf("-----------------\n");
 }
 
