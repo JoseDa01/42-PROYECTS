@@ -6,7 +6,7 @@
 /*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 16:25:04 by jtello-m          #+#    #+#             */
-/*   Updated: 2020/02/17 20:22:18 by jtello-m         ###   ########.fr       */
+/*   Updated: 2020/02/21 18:06:26 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,12 @@ int		ft_printf(const char *str, ...)
 {
 	va_list	fa;
 	t_var	*count;
-	
+
 	if (!(count = (t_var *)malloc(sizeof(t_var))))
 		return (-1);
-	count->i = 0;
 	va_start(fa, str);
 	ft_struc_init(count);
-	while(str[count->i] != '\0')
+	while (str[count->i] != '\0')
 	{
 		if (str[count->i] == '%')
 		{
@@ -33,24 +32,28 @@ int		ft_printf(const char *str, ...)
 		else
 		{
 			write(1, &str[count->i], 1);
-			count->chcount++;	
+			count->chcount++;
 		}
 		count->i++;
 	}
 	va_end(fa);
+	free(count);
 	return (count->chcount);
 }
 
 void	ft_flags(const char *str, t_var *count, va_list fa)
 {
+	size_t pos;
+
+	pos = (size_t)count->i - 1;
 	while (ft_check_flags(str, count, fa))
 	{
 		count->i++;
 	}
-	ft_format(str, count, fa);
+	ft_format(str, count, fa, pos);
 }
 
-void	ft_format(const char *str, t_var *count, va_list fa)
+void	ft_format(const char *str, t_var *count, va_list fa, size_t ppos)
 {
 	if (str[count->i] == 's')
 		ft_args_str(str, count, fa);
@@ -66,4 +69,9 @@ void	ft_format(const char *str, t_var *count, va_list fa)
 		ft_args_pct(str, count);
 	else if (str[count->i] == 'u')
 		ft_args_u(str, count, fa);
+	else
+	{
+		count->i = ppos;
+		write(1, str + count->i, 1);
+	}
 }

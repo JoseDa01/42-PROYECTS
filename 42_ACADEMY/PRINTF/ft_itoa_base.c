@@ -6,12 +6,13 @@
 /*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 16:08:03 by jtello-m          #+#    #+#             */
-/*   Updated: 2020/02/14 19:43:42 by jtello-m         ###   ########.fr       */
+/*   Updated: 2020/02/23 07:43:51 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdio.h>
+#include "libftprintf.h"
 
 int		ft_abs(int nb)
 {
@@ -26,18 +27,17 @@ char	*ft_itoa_base(unsigned long nbr, int base, char *tab)
 	int					size;
 	int					flag;
 	unsigned long		tmp;
-	
+
 	flag = 0;
 	size = 0;
 	if (base < 2 || base > 16)
 		return (0);
-	if (nbr < 0 && base == 10)
-		flag = 1;
+	flag = ((nbr < 0) && (base == 10)) ? 1 : 0;
 	tmp = nbr;
 	while (tmp /= base)
 		size++;
 	size = size + flag + 1;
-	str = (char *)malloc(sizeof(char) * size  + 1);
+	str = (char *)malloc(sizeof(char) * size + 1);
 	str[size] = '\0';
 	if (flag == 1)
 		str[0] = '-';
@@ -45,7 +45,7 @@ char	*ft_itoa_base(unsigned long nbr, int base, char *tab)
 	{
 		str[size - 1] = tab[ft_abs(nbr % base)];
 		size--;
-		nbr /=base;
+		nbr /= base;
 	}
 	return (str);
 }

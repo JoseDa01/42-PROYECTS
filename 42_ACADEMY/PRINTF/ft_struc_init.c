@@ -6,7 +6,7 @@
 /*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 18:42:00 by jtello-m          #+#    #+#             */
-/*   Updated: 2020/02/14 20:48:04 by jtello-m         ###   ########.fr       */
+/*   Updated: 2020/02/23 06:04:47 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ void	ft_struc_init(t_var *count)
 	count->n = 0;
 	count->p = 0;
 	count->u = 0;
-	count->hex_str = 0;
+	count->hex = 0;
 }

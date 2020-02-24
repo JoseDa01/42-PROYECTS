@@ -2,7 +2,7 @@ NAME = libftprintf.a
 
 SRCS = $(wildcard *.c)
 
-GCC = gcc -Wall -Wextra -Werror
+GCC = gcc -Wextra -Werror -Wall
 
 LIBFT = $(wildcard libft/*.c)
 

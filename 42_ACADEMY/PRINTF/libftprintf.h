@@ -6,7 +6,7 @@
 /*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 16:46:56 by jtello-m          #+#    #+#             */
-/*   Updated: 2020/02/17 20:22:46 by jtello-m         ###   ########.fr       */
+/*   Updated: 2020/02/23 07:43:56 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,40 +19,41 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include "libft/libft.h"
+
 typedef	struct	s_var
 {
-	int i; //contador del main str
-	int j;
-	int chcount;
-	int flag0;
-	int flagm;
-	int flagp; 
-	int flags;
-	int nflags;
-	int flag_is_negative;
-	int nbr;
-	int nbrm;
-	int nbr0;
-	int nbrp;
-	int large;
-	int tam;
-	int tam_p;
-	char a;
-	char *s;
-	int n;
-	int p; //pruebas
-	char *p_str;
-	char *n_str;
-	char *hex_str;
-	unsigned int u;
-	char *u_str;
-	unsigned long hex;
+	int				i;
+	int				j;
+	int				chcount;
+	int				flag0;
+	int				flagm;
+	int				flagp;
+	int				flags;
+	int				nflags;
+	int				flag_is_negative;
+	int				nbr;
+	int				nbrm;
+	int				nbr0;
+	int				nbrp;
+	int				large;
+	int				tam;
+	int				tam_p;
+	char			a;
+	char			*s;
+	int				n;
+	unsigned long	p;
+	char			*p_str;
+	char			*n_str;
+	char			*hex_str;
+	unsigned int	u;
+	char			*u_str;
+	unsigned int	hex;
 }				t_var;
-
 
 int				ft_printf(const char *str, ...);
 void			ft_flags(const char *str, t_var *count, va_list fa);
-void			ft_format(const char *str, t_var *count, va_list fa);
+void			ft_format(const char *str, t_var *count,
+va_list fa, size_t ppos);
 void			ft_flags(const char *str, t_var *count, va_list fa);
 int				ft_check_flags(const char *str, t_var *count, va_list fa);
 void			assig_nbr(const char *str, t_var *count);
@@ -79,5 +80,12 @@ void			ft_struc_reset(t_var *count);
 int				ft_atoi(const char *str, t_var *count);
 char			*ft_itoa(int n);
 char			*ft_itoa_u(unsigned int n);
-char			*ft_itoa_base(int nbr, int base, char *tab);
+char			*ft_itoa_base(unsigned long nbr, int base, char *tab);
+void			ft_writeflags(int nbr, int tam, int j, t_var *count);
+void			ft_writeflags_int(int tam, int j, t_var *count);
+void			ft_writeflags_str(int i, char *str, t_var *count);
+void			special_cases(t_var *count);
+void			starpt(const char *str, t_var *count, va_list fa);
+void			starflag_auxnbr0(t_var *count);
+void			starflag_auxnbr(t_var *count);
 #endif

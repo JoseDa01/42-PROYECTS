@@ -6,7 +6,7 @@
 /*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 17:01:54 by jtello-m          #+#    #+#             */
-/*   Updated: 2020/02/17 20:02:09 by jtello-m         ###   ########.fr       */
+/*   Updated: 2020/02/21 18:50:27 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,27 +20,13 @@ void	ft_u(const char *u_str, t_var *count)
 	i = 0;
 	j = 1;
 	if (count->flagp == 1 && count->nbrp > count->tam)
-	{
-		while (j <= count->nbrp - count->tam)
-		{
-			write(1, "0", 1);
-			j++;
-			count->chcount++;
-		}
-	}
+		ft_writeflags(count->nbrp, count->tam, j, count);
 	else if (count->flagp == 1 && count->nbrp == count->tam)
-	{
-		while (j <= count->nbrp - count->tam_p)
-		{
-			write(1, "0", 1);
-			j++;
-			count->chcount++;
-		}
-	}
+		ft_writeflags(count->nbrp, count->tam_p, j, count);
 	while (u_str[i] != '\0')
 	{
 		if (count->flagp == 1 && count->nbrp == 0)
-			break;
+			break ;
 		write(1, &u_str[i], 1);
 		i++;
 		count->chcount++;
@@ -71,4 +57,5 @@ void	ft_args_u(const char *str, t_var *count, va_list fa)
 		count->tam = 0;
 	ft_app_flags(str, count);
 	ft_u(count->u_str, count);
+	free(count->u_str);
 }

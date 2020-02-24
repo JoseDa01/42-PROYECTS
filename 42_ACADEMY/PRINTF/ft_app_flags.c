@@ -6,7 +6,7 @@
 /*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 17:15:31 by jtello-m          #+#    #+#             */
-/*   Updated: 2020/02/14 20:22:14 by jtello-m         ###   ########.fr       */
+/*   Updated: 2020/02/20 21:02:26 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	ft_app_flags(const char *str, t_var *count)
 void	ft_flag_minus(t_var *count)
 {
 	count->j = 1;
-	
 	while (count->j <= (count->nbrm - count->tam))
 	{
 		count->j++;

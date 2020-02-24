@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_hex.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/12 02:08:25 by marvin            #+#    #+#             */
-/*   Updated: 2020/02/12 02:08:25 by marvin           ###   ########.fr       */
+/*   Created: 2020/02/20 21:27:34 by jtello-m          #+#    #+#             */
+/*   Updated: 2020/02/23 07:42:44 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,27 +20,13 @@ void	ft_hex(const char *hex_str, t_var *count)
 	i = 0;
 	j = 1;
 	if (count->flagp == 1 && count->nbrp > count->tam)
-	{
-		while (j <= count->nbrp - count->tam)
-		{
-			write(1, "0", 1);
-			j++;
-			count->chcount++;
-		}
-	}
+		ft_writeflags(count->nbrp, count->tam, j, count);
 	else if (count->flagp == 1 && count->nbrp == count->tam)
-	{
-		while (j <= count->nbrp - count->tam_p)
-		{
-			write(1, "0", 1);
-			j++;
-			count->chcount++;
-		}
-	}
+		ft_writeflags(count->nbrp, count->tam_p, j, count);
 	while (hex_str[i] != '\0')
 	{
 		if (count->flagp == 1 && count->nbrp == 0)
-			break;
+			break ;
 		write(1, &hex_str[i], 1);
 		i++;
 		count->chcount++;
@@ -48,7 +34,6 @@ void	ft_hex(const char *hex_str, t_var *count)
 	if (count->flagm == 1)
 		ft_flag_minus(count);
 }
-
 
 void	ft_args_hex(const char *str, t_var *count, va_list fa)
 {
@@ -58,7 +43,7 @@ void	ft_args_hex(const char *str, t_var *count, va_list fa)
 		count->nbr = count->nbr0;
 		count->flag0 = 0;
 	}
-	count->hex = va_arg(fa, unsigned long);
+	count->hex = va_arg(fa, unsigned int);
 	if (str[count->i] == 'x')
 		count->hex_str = ft_itoa_base(count->hex, 16, "0123456789abcdef");
 	if (str[count->i] == 'X')
@@ -75,4 +60,5 @@ void	ft_args_hex(const char *str, t_var *count, va_list fa)
 		count->tam = 0;
 	ft_app_flags(str, count);
 	ft_hex(count->hex_str, count);
+	free(count->hex_str);
 }

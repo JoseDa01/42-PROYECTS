@@ -6,7 +6,7 @@
 /*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 17:22:48 by jtello-m          #+#    #+#             */
-/*   Updated: 2019/11/18 16:23:43 by jtello-m         ###   ########.fr       */
+/*   Updated: 2020/02/21 18:58:36 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	str = malloc(lens1 + lens2 + 1);
 	if (str)
 	{
-		memcpy(str, s1, lens1);
-		memcpy(str + lens1, s2, lens2 + 1);
+		ft_memcpy(str, s1, lens1);
+		ft_memcpy(str + lens1, s2, lens2 + 1);
 	}
+    free((char *)s1);
+    free((char *)s2);
 	return (str);
 }
