@@ -6,7 +6,7 @@
 /*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 16:46:56 by jtello-m          #+#    #+#             */
-/*   Updated: 2020/02/23 07:43:56 by jtello-m         ###   ########.fr       */
+/*   Updated: 2020/02/25 20:50:32 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void			ft_args_ptr(const char *str, t_var *count, va_list fa);
 void			ft_str(t_var *count);
 void			ft_prec_str(t_var *count);
 void			ft_args_str(const char *str, t_var *count, va_list fa);
+void			ft_args_ptr_tam(t_var *count);
 void			ft_char(t_var *count);
 void			ft_args_c(char const *str, t_var *count, va_list fa);
 void			ft_int(char *str_int, t_var *count);

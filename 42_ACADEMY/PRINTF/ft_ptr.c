@@ -6,7 +6,7 @@
 /*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 21:17:37 by jtello-m          #+#    #+#             */
-/*   Updated: 2020/02/21 18:54:54 by jtello-m         ###   ########.fr       */
+/*   Updated: 2020/02/25 20:50:45 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,26 +39,37 @@ void	ft_ptr(const char *p_str, t_var *count)
 void	ft_args_ptr(const char *str, t_var *count, va_list fa)
 {
 	int flagpt;
+	int flagleaks;
 
 	flagpt = 0;
+	flagleaks = 0;
 	count->p = (unsigned long)va_arg(fa, void *);
 	count->p_str = ft_itoa_base(count->p, 16, "0123456789abcdef");
+	ft_args_ptr_tam(count);
+	count->tam_p = count->tam;
+	if (count->tam >= count->nbrp && count->flagp == 1)
+		count->tam_p = count->nbrp;
+	if (count->flagp == 1 && count->nbrp == 0)
+	{
+		free(count->p_str);
+		count->p_str = "";
+		flagpt = 1;
+		flagleaks = 1;
+	}
+	if (count->flagp == 1 && count->nflags == 1 && flagpt == 0)
+		count->tam += 2;
+	ft_app_flags(str, count);
+	ft_ptr(count->p_str, count);
+	if (flagleaks == 0)
+		free(count->p_str);
+}
+
+void	ft_args_ptr_tam(t_var *count)
+{
 	if (count->nbrp == 0 && count->flagp == 1)
 		count->tam = ft_strlen1(count->p_str) + 1;
 	else if (count->nflags == 1 && count->flagp == 0)
 		count->tam = ft_strlen1(count->p_str) + 2;
 	else
 		count->tam = ft_strlen1(count->p_str);
-	count->tam_p = count->tam;
-	if (count->tam >= count->nbrp && count->flagp == 1)
-		count->tam_p = count->nbrp;
-	if (count->flagp == 1 && count->nbrp == 0)
-	{
-		count->p_str = "";
-		flagpt = 1;
-	}
-	if (count->flagp == 1 && count->nflags == 1 && flagpt == 0)
-		count->tam += 2;
-	ft_app_flags(str, count);
-	ft_ptr(count->p_str, count);
 }
