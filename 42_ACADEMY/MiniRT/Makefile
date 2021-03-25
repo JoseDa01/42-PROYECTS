@@ -10,15 +10,15 @@ SRCS_ARG = $(wildcard readRT/ft_*.c)
 
 SRCS_CLR = $(wildcard colorRT/*.c)
 
-SRCS_GNI = $(wildcard generateImageRT/*.c)
+SRCS_GNI = $(wildcard generateimageRT/*.c)
 
-SRCS_BMP = $(wildcard generateImage/bmp/*.c)
+SRCS_BMP = $(wildcard generateimageRT/bmp/*.c)
 
 SRCS_LD = $(wildcard loadRT/*.c)
 
 SRCS_MATHS = $(wildcard mathRT/*.c)
 
-SRCS_MATRIX = $(wildcard maths/matrixs/*.c)
+SRCS_MATRIX = $(wildcard mathRT/matrix/*.c)
 
 SRCS_INTER = $(wildcard intersectionsRT/*.c)
 

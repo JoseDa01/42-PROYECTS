@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mathrt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 20:59:42 by jtello-m          #+#    #+#             */
-/*   Updated: 2021/03/25 03:12:19 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/25 13:31:35 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 # include "../minirt.h"
 # include "matrix/matrix.h"
 
-t_tupla			solveequation(t_tupla equation, double equal);
-t_tupla			solveequation2(t_tupla equation, double equal);
-t_tupla			solveequation1(t_tupla equation, double equal);
-t_tupla			notableproduct(double a, double b);
-t_tupla			addtupla(t_tupla first, t_tupla second);
-t_tupla			multupla(t_tupla tupla, double number);
-t_tupla			newtupla(double first, double second);
-double			lowernumber(t_tupla tupla);
-double			absoluto(double abs);
+t_tupla				solveequation(t_tupla equation, double equal);
+t_tupla				solveequation2(t_tupla equation, double equal);
+t_tupla				solveequation1(t_tupla equation, double equal);
+t_tupla				notableproduct(double a, double b);
+t_tupla				addtupla(t_tupla first, t_tupla second);
+t_tupla				multupla(t_tupla tupla, double number);
+t_tupla				newtupla(double first, double second);
+double				lowernumber(t_tupla tupla);
+double				absoluto(double abs);
 t_vect3				newvector(double x, double y, double z);
 t_vect3				crossproduct(t_vect3 first, t_vect3 second);
 double				vector_index(t_vect3 vect, int i);

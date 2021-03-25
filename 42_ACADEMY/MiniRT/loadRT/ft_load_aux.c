@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_load_aux.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:02:43 by jtello-m          #+#    #+#             */
-/*   Updated: 2021/03/25 02:32:13 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/25 13:35:59 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,34 +55,34 @@ void			addobject(t_scene *scene, void *object)
 }
 
 
-float	ft_atof(char *str)
+double			ft_atoi_double(char *number)
 {
-	int i;
-	float number;
-	float flag;
-	int sign;
+	int			i;
+	double		after_point;
+	double 		returned;
+	int			sign;
 
 	i = 0;
-	number = 0;
-	flag = 0;
+	after_point = 0;
+	returned = 0;
 	sign = 1;
-	if (str[0] == '-')
+	if(number[0] == '-')
 		sign = -1;
-	while (str[i] != '\0')
+	while(number[i] != '\0')
 	{
-		if (str[i] == '.')
-			flag = 10;
-		else if (str[i] >= '0' && str[i] <= '9')
+		if(number[i] == '.')
+			after_point = 10;
+		else if(number[i] >= '0' && number[i] <= '9')
 		{
-			if (flag == 0)
-				number = number * 10 + str[i] - '0';
+			if(after_point == 0)
+				returned = returned * 10 + number[i] - '0';
 			else
 			{
-				number += (str[i] - '0') / flag;
-				flag *= 10;
+				returned += (number[i] - '0') / after_point;
+				after_point *= 10;
 			}
 		}
 		i++;
 	}
-	return(sign * number);
+	return (sign * returned);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loadrt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:43:51 by jtello-m          #+#    #+#             */
-/*   Updated: 2021/03/25 02:36:09 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/25 13:35:49 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ int				countwords(char **words);
 void			freespace(char **words);
 void			error(char *s);
 int				fundamentalsobjects(char *str);
-void			init_camera(t_camera *cam, t_resol resol);
+double			ft_atoi_double(char *number);
+void			init_camera(t_camera *camera, t_resolution resol);
 #endif

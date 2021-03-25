@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_libx_init.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 12:13:43 by jtello-m          #+#    #+#             */
-/*   Updated: 2021/03/25 02:40:39 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/25 13:15:54 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,3 +49,4 @@ void	ini_libx(t_data_struct *data)
 	mlx_do_key_autorepeatoff(data->libx.ptr);
 	mlx_hook(data->libx.win_ptr, 2, 1, key_pressed, &data->scene);
 	mlx_mouse_hook(data->libx.win_ptr, &mouse_hook, &data->libx);
+}

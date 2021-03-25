@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_loadcamres.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 13:53:25 by jtello-m          #+#    #+#             */
-/*   Updated: 2021/03/25 02:33:23 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/25 13:51:18 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void			loadcamera(t_scene *scene, char **words)
 	camera_list->origin = chargepoint(words[1]);
 	camera_list->direction = chargenormalizedvector(words[2]);
 	camera_list->fov_h = ft_atoi_double(words[3]);
-	inicamera(camera_list, scene->resolution);
+	init_camera(camera_list, scene->resolution);
 	fundamentalsobjects("camera");
 }
 
@@ -64,13 +64,13 @@ int				fundamentalsobjects(char *str)
 	return (camera & resolution);
 }
 
-void	init_camera(t_camera *cam, t_resol resol)
+void	init_camera(t_camera *camera, t_resolution resol)
 {
-	cam->vectorx = perpendicular_rand_vect(cam->direction);
-	cam->vectory = crossproduct(cam->vectorx, cam->direction);
-	cam->vectorx = changelenght(cam->vectorx, 1);
-	cam->vectory = changelenght(cam->vectory, 1);
-	cam->direction = changelenght(cam->direction, 1);
-	cam->fov_rad = (cam->fov / 360) * 2 * M_PI;
-	cam->depth = resol.x / (2 * tan(cam->fov_rad / 2));
+	camera->vectorx = perpendicular_rand_vect(camera->direction);
+	camera->vectory = crossproduct(camera->vectorx, camera->direction);
+	camera->vectorx = changelenght(camera->vectorx, 1);
+	camera->vectory = changelenght(camera->vectory, 1);
+	camera->direction = changelenght(camera->direction, 1);
+	camera->fov_h_rad = (camera->fov_h / 360) * 2 * M_PI;
+	camera->depth = resol.x / (2 * tan(camera->fov_h_rad / 2));
 }

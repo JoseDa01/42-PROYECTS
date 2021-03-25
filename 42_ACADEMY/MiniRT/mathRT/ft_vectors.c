@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_vectors.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 20:59:22 by jtello-m          #+#    #+#             */
-/*   Updated: 2021/03/25 03:10:36 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/25 13:30:42 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mathrt.h"
-
-#include "vectors.h"
 
 double				distancepoint(t_vect3 point1, t_vect3 point2)
 {

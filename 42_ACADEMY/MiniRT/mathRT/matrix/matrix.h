@@ -12,7 +12,7 @@
 
 #ifndef MATRIX_H
 # define MATRIX_H
-# include "../mathRT.h"
+# include "../mathrt.h"
 
 t_vect3			rotatevector(t_matrix3 matrix, t_vect3 vector);
 t_matrix3		inversematrix(t_matrix3 matrix);

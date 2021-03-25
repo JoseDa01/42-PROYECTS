@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_operations.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:44:42 by jtello-m          #+#    #+#             */
-/*   Updated: 2021/03/25 03:04:19 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/25 13:31:34 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mathrt.h"
 
-t_tupla				notableproduct(float a, float b)
+t_tupla				notableproduct(double a, double b)
 {
 	t_tupla		result;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_equation.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 13:17:03 by jtello-m          #+#    #+#             */
-/*   Updated: 2021/03/25 03:05:29 by marvin           ###   ########.fr       */
+/*   Updated: 2021/03/25 13:52:19 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,20 @@ t_tupla			solveequation(t_tupla equation, double equal)
 		solution = solveequation2(equation, equal);
 	else if (equation.tamaño == 2)
 		solution = solveequation1(equation, equal);
+	return (solution);
+}
+
+t_tupla			solveequation1(t_tupla equation, double equal)
+{
+	t_tupla	solution;
+
+	if (equation.tupla[0] == 0)
+		solution.tamaño = 0;
+	else
+	{
+		solution.tamaño = 1;
+		solution.tupla[0] = (equal - equation.tupla[1]) / equation.tupla[0];
+	}
 	return (solution);
 }
 
