@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loadrt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:43:51 by jtello-m          #+#    #+#             */
-/*   Updated: 2021/03/17 18:02:16 by jtello-m         ###   ########.fr       */
+/*   Updated: 2021/03/25 02:36:09 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,24 @@
 # define LOADRT_H
 # include "../minirt.h"
 
-int				loadscene(t_scene *scene, char *args_file);
-void			processdata(t_scene *scene, char **comp, char *line);
-void			loadresol(t_scene *scene, char **comp);
-void			loadcam(t_scene *scene, char **comp);
-void			loadamlight(t_scene *scene, char **comp);
-void			loadlight(t_scene *scene, char **comp);
-void			loadsphere(t_scene *scene, char **comp);
-t_vector		loadpoint(char *point);
-t_rgbcolor		loadcolor(char *color);
-t_vector		loadvector(char *vector);
-int				compcounter(char **comp);
-void			freecomps(char **comp);
+int				loadscene(t_scene *scene, char *filename);
+void			processstring(t_scene *scene, char **words);
+void			loadtriangle(t_scene *scene, char **words);
+void			loadcylinder(t_scene *scene, char **words);
+void			loadsquare(t_scene *scene, char **words);
+void			loadplane(t_scene *scene, char **words);
+void			loadsphere(t_scene *scene, char **words);
+void			loadlight(t_scene *scene, char **words);
+void			loadcamera(t_scene *scene, char **words);
+void			loadresolution(t_scene *scene, char **words);
+void			loadambientlight(t_scene *scene, char **words);
+t_vect3			chargenormalizedvector(char *vector);
+t_color			chargecolor(char *rgb);
+t_vect3			chargepoint(char *point);
 void			addobject(t_scene *scene, void *object);
-float			ft_atof(char *str);
+int				countwords(char **words);
+void			freespace(char **words);
+void			error(char *s);
+int				fundamentalsobjects(char *str);
 void			init_camera(t_camera *cam, t_resol resol);
 #endif

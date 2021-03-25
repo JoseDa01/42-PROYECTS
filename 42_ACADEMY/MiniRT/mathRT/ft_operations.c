@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_operations.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 13:44:42 by jtello-m          #+#    #+#             */
-/*   Updated: 2021/03/16 13:47:18 by jtello-m         ###   ########.fr       */
+/*   Updated: 2021/03/25 03:04:19 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,50 @@ t_tupla				addtupla(t_tupla a, t_tupla b)
 	return (result);
 }
 
-float				lowernb(t_tupla tupla)
+t_tupla			multupla(t_tupla tupla, double number)
 {
-	float		lower;
+	t_tupla		mul;
 	int			i;
 
-	lower = tupla.tupla[0];
+	mul.tamaño = tupla.tamaño;
 	i = 0;
 	while (i < tupla.tamaño)
 	{
-		if (tupla.tupla[i] < lower && tupla.tupla >= 0)
+		mul.tupla[i] = tupla.tupla[i] * number;
+		i++;
+	}
+	return (mul);
+}
+
+t_tupla			newtupla(double first, double second)
+{
+	t_tupla tupla;
+
+	tupla.tamaño = 2;
+	tupla.tupla[0] = first;
+	tupla.tupla[1] = second;
+	return (tupla);
+}
+
+double			lowernumber(t_tupla tupla)
+{
+	int			i;
+	double		lower;
+
+	lower = tupla.tupla[0];
+	i = 1;
+	while (i < tupla.tamaño)
+	{
+		if (tupla.tupla[i] < lower && tupla.tupla[i] >= 0)
 			lower = tupla.tupla[i];
 		i++;
 	}
 	return (lower);
+}
+
+double			absoluto(double abs)
+{
+	if (abs < 0)
+		return (-abs);
+	return (abs);
 }

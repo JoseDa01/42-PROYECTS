@@ -12,24 +12,11 @@
 
 #include "mathrt.h"
 
-float		distancept(t_vector point1, t_vector point2)
-{
-	float	dist;
-
-	dist = 0;
-	dist += pow(point1.x - point2.x, 2);
-	dist += pow(point1.y - point2.y, 2);
-	dist += pow(point1.z - point2.z, 2);
-	dist = sqrt(dist);
-	return (dist);
-
-}
-
-t_vector		perpendicular_rand_vect(t_vector vector)
+t_vect3				perpendicular_rand_vect(t_vect3 vector)
 {
 	t_tupla		equation;
 	t_tupla		solution;
-	t_vector	new_vector;
+	t_vect3		new_vector;
 
 	equation.tamaño = 2;
 	new_vector.x = 1;
@@ -39,42 +26,62 @@ t_vector		perpendicular_rand_vect(t_vector vector)
 	{
 		equation.tupla[1] = vector.y + vector.z;
 		equation.tupla[0] = vector.x;
-		solution = solvequation(equation, 0);
+		solution = solveequation(equation, 0);
 		new_vector.x = solution.tupla[0];
 	}
 	else if (vector.y != 0)
 	{
 		equation.tupla[1] = vector.x + vector.z;
 		equation.tupla[0] = vector.y;
-		solution = solvequation(equation, 0);
+		solution = solveequation(equation, 0);
 		new_vector.y = solution.tupla[0];
 	}
 	else
 	{
 		equation.tupla[1] = vector.x + vector.y;
 		equation.tupla[0] = vector.z;
-		solution = solvequation(equation, 0);
+		solution = solveequation(equation, 0);
 		new_vector.z = solution.tupla[0];
 	}
 	return (new_vector);
 }
 
-float			modulevector(t_vector vector)
+double				modulevector(t_vect3 vector)
 {
-	float		module;
+	double module;
 
 	module = 0;
 	module += pow(vector.x, 2) + pow(vector.y, 2) + pow(vector.z, 2);
 	module = sqrt(module);
-	return (module); 
+	return (module);
 }
 
-float			angle2vects(t_vector vector1, t_vector vector2)
+t_vect3				pointray(t_rayo ray, double lamda)
 {
-	float		sclproduct;
-	float		cos;
+	t_vect3 point;
 
-	sclproduct = vector1.x * vector2.x + vector1.y * vector2.y + vector1.z * vector2.z;
-	cos = sclproduct / (modulevector(vector1) * modulevector(vector2));
-	return (cos);
+	point.x = ray.punto.x + lamda * ray.vector.x;
+	point.y = ray.punto.y + lamda * ray.vector.y;
+	point.z = ray.punto.z + lamda * ray.vector.z;
+	return (point);
+}
+
+t_vect3				distancevector(t_vect3 point1, t_vect3 point2)
+{
+	t_vect3 vect;
+
+	vect.x = point1.x - point2.x;
+	vect.y = point1.y - point2.y;
+	vect.z = point1.z - point2.z;
+	return (vect);
+}
+
+t_vect3				addvector(t_vect3 vect1, t_vect3 vect2)
+{
+	t_vect3 vector;
+
+	vector.x = vect1.x + vect2.x;
+	vector.y = vect1.y + vect2.y;
+	vector.z = vect1.z + vect2.z;
+	return (vector);
 }

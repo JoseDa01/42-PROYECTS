@@ -3,62 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   ft_loadvect.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:26:56 by jtello-m          #+#    #+#             */
-/*   Updated: 2021/03/19 19:10:55 by jtello-m         ###   ########.fr       */
+/*   Updated: 2021/03/25 02:35:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "loadrt.h"
 
-t_vector		loadpoint(char *point)
+t_vect3			chargepoint(char *point)
 {
-	t_vector	lpoint;
-	char		**comp;
-	
-	comp = ft_split(point, ',');
-	if (compcounter(comp) != 3)
-	{
-		printf("ERROR\nlos datos recibidos no son validos (punto)\n");
-		exit(-1);
-	}
-	lpoint.x = ft_atof(comp[0]);
-	lpoint.y = ft_atof(comp[1]);
-	lpoint.z = ft_atof(comp[2]);
-	freecomps(comp);
-	
-	return(lpoint);
+	t_vect3		point1;
+	char		**numbers;
+
+	numbers = ft_split(point, ',');
+	if (countwords(numbers) != 3)
+		error("Mal formato de punts en el espacio");
+	point1.x = ft_atoi_double(numbers[0]);
+	point1.y = ft_atoi_double(numbers[1]);
+	point1.z = ft_atoi_double(numbers[2]);
+	freespace(numbers);
+	return (point1);
 }
 
-t_rgbcolor		loadcolor(char *color)
+t_color			chargecolor(char *rgb)
 {
-	t_rgbcolor	rgb;
-	char		**comp;
+	char		**words;
+	t_color		returned;
 
-	comp = ft_split(color, ',');
-	if (compcounter(comp) != 3)
-		printf("ERROR\nlos datos recibidos no son validos (color)\n");
-	rgb.red = ft_atoi(comp[0]);
-	rgb.green = ft_atoi(comp[1]);
-	rgb.blue = ft_atoi(comp[2]);
-	freecomps(comp);
-
-	return(rgb);
+	words = ft_split(rgb, ',');
+	if (countwords(words) != 3)
+		error("Mal formato de colores rgb");
+	returned.red = ft_atoi(words[0]);
+	returned.green = ft_atoi(words[1]);
+	returned.blue = ft_atoi(words[2]);
+	freespace(words);
+	if (!(returned.red >= 0 && returned.red <= 255 && returned.green >= 0 && returned.green <= 255 && returned.blue >= 0 && returned.blue <= 255))
+		error("Los componentes de un color codificado en rgb deben estar en el rango [0,255]");
+	return (returned);
 }
 
-t_vector		loadvector(char *vector)
+t_vect3			chargenormalizedvector(char *vector)
 {
-	t_vector	lvector;
-	char		**comp;
+	t_vect3		vector1;
+	char		**numbers;
 
-	comp = ft_split(vector, ',');
-	if (compcounter(comp) != 3)
-		printf("ERROR\nlos datos recibidos no son validos (vector)\n");
-	lvector.x = ft_atof(comp[0]);
-	lvector.y = ft_atof(comp[1]);
-	lvector.z = ft_atof(comp[2]);
-	freecomps(comp);
-
-	return(lvector);
+	numbers = ft_split(vector, ',');
+	if (countwords(numbers) != 3)
+		error("Mal formato de vector");
+	vector1.x = ft_atoi_double(numbers[0]);
+	vector1.y = ft_atoi_double(numbers[1]);
+	vector1.z = ft_atoi_double(numbers[2]);
+	freespace(numbers);
+	if (!(vector1.x >= -1 && vector1.x <= 1 && vector1.y >= -1 && vector1.y <= 1 && vector1.z >= -1 && vector1.z <= 1))
+		error("Los componentes de un vector de direccion deben estar en el rango [-1,1]");
+	if (vector1.x == 0 && vector1.y == 0 && vector1.z == 0)
+		error("No puede haber un vector nulo");
+	return (vector1);
 }

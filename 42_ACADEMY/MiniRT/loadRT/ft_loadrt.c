@@ -3,64 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   ft_loadrt.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:30:40 by jtello-m          #+#    #+#             */
-/*   Updated: 2021/03/19 19:17:21 by jtello-m         ###   ########.fr       */
+/*   Updated: 2021/03/25 02:35:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "loadrt.h"
 
-void	processdata(t_scene *scene, char **comp, char *line)
+void			processstring(t_scene *scene, char **words)
 {
-	if (line[0] == 'R')
-		loadresol(scene, comp);
-	else if(line[0] == 'A')
-		loadamlight(scene, comp);
-	else if (line[0] == 'c')
-		loadcam(scene, comp);
-	else if(line[0] == 'l')
-		loadlight(scene, comp);
-	else if(line[0] == 's' && line[1] == 'p')
-		loadsphere(scene, comp);
-	/*else if(line[0] == 'p' && line[1] == 'l')
-		loadplane();
-	else if(line[0] == 's' && line[1] == 'q')
-		loadsquare();
-	else if(line[0] == 'c' && line[1] == 'y')
-		loadcylinder();
-	else if(line[0] == 't' && line[1] == 'r')
-		loadtriangle();*/
+	if (ft_strncmp("R", words[0], ft_strlen(words[0])) == 0)
+		loadresolution(scene, words);
+	else if (ft_strncmp("A", words[0], ft_strlen(words[0])) == 0)
+		loadambientlight(scene, words);
+	else if (ft_strncmp("c", words[0], ft_strlen(words[0])) == 0)
+		loadcamera(scene, words);
+	else if (ft_strncmp("l", words[0], ft_strlen(words[0])) == 0)
+		loadlight(scene, words);
+	else if (ft_strncmp("sp", words[0], ft_strlen(words[0])) == 0)
+		loadsphere(scene, words);
+	else if (ft_strncmp("pl", words[0], ft_strlen(words[0])) == 0)
+		loadplane(scene, words);
+	else if (ft_strncmp("sq", words[0], ft_strlen(words[0])) == 0)
+		loadsquare(scene, words);
+	else if (ft_strncmp("cy", words[0], ft_strlen(words[0])) == 0)
+		loadcylinder(scene, words);
+	else if (ft_strncmp("tr", words[0], ft_strlen(words[0])) == 0)
+		loadtriangle(scene, words);
 	else
-		printf("ERROR\nNo se ha encontrado ningun objeto\n");
+		error("no se ha reconocido un identificador");
 }
 
-
-int		loadscene(t_scene *scene, char *args_file)
+int				loadscene(t_scene *scene, char *filename)
 {
 	char	*line;
-	char	**comp;
+	char	**words;
 	int		fd;
-	int		flag;
+	int		end;
 
-	flag = 0;
-	fd = open(args_file, O_RDONLY);
-	if (fd < 0 && args_file != NULL)
-	{
-		printf("ERROR\nNo se puede abrir el archivo\n");
-		exit(-1);
-	}
-	while (!flag)
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		error("no se ha podido abrir el fichero indicado");
+	end = 0;
+	while (!end)
 	{
 		if (get_next_line(fd, &line) == 0)
-			flag = 1;
-		comp = ft_split(line, ' ');
-		if (compcounter(comp) >= 1)
-			processdata(scene, comp, line);
-		freecomps(comp);
+			end = 1;
+		words = ft_split(line, ' ');
+		if (countwords(words) > 0)
+			processstring(scene, words);
+		freespace(words);
 		free(line);
 	}
+	if (fundamentalsobjects("") == 0)
+		error("Faltan objetos necesarios");
 	close(fd);
-	return(0);
+	return (0);
 }

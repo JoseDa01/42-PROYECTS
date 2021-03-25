@@ -3,40 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   ft_loadlights.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 20:00:40 by jtello-m          #+#    #+#             */
-/*   Updated: 2021/03/19 18:50:00 by jtello-m         ###   ########.fr       */
+/*   Updated: 2021/03/25 02:33:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "loadrt.h"
 
-void		loadamlight(t_scene *scene, char **comp)
+void			loadambientlight(t_scene *scene, char **words)
 {
-	if (compcounter(comp) != 3)
-		printf("ERROR\nformato de luz ambiental no valido\n");
-	scene->am_light.luminosity = ft_atof(comp[1]);
-	scene->am_light.color = loadcolor(comp[2]);
+	static int countcalls = 0;
+
+	countcalls++;
+	if (countcalls > 1)
+		error("solo debe de haber una luz ambiental");
+	if (countwords(words) != 3)
+		error("mal formato de luz ambiental");
+	scene->env_light.intensity = ft_atoi_double(words[1]);
+	scene->env_light.color = chargecolor(words[2]);
 }
 
-void		loadlight(t_scene *scene, char **comp)
+void			loadlight(t_scene *scene, char **words)
 {
-	static t_list_lights	*light_list;
+	static t_list_light *light_list;
 
-	if (compcounter(comp) != 4)
-		printf("ERROR\nformato de foco de luz no valido\n");
+	if (countwords(words) != 4)
+		error("mal formato de luz");
 	if (light_list == NULL)
 	{
-		light_list = ft_calloc(1, sizeof(t_list_lights));
+		light_list = ft_calloc(1, sizeof(t_list_light));
 		scene->lights = light_list;
 	}
 	else
 	{
-		light_list->next = ft_calloc(1, sizeof(t_list_lights));
+		light_list->next = ft_calloc(1, sizeof(t_list_light));
 		light_list = light_list->next;
 	}
-	light_list->light.light_point = loadpoint(comp[1]);
-	light_list->light.luminosity = ft_atof(comp[2]);
-	light_list->light.color = loadcolor(comp[3]);
+	light_list->point.point = chargepoint(words[1]);
+	light_list->point.intensity = ft_atoi_double(words[2]);
+	light_list->point.color = chargecolor(words[3]);
 }

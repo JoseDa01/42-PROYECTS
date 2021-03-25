@@ -3,77 +3,77 @@
 /*                                                        :::      ::::::::   */
 /*   ft_color.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 12:44:43 by jtello-m          #+#    #+#             */
-/*   Updated: 2021/03/16 14:02:57 by jtello-m         ###   ########.fr       */
+/*   Updated: 2021/03/25 02:51:34 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "colorrt.h"
 
-t_rgbcolor			intenscolor(t_rgbcolor color, float intens)
+t_color			intensitycolor(t_color color, double intensity)
 {
-	t_rgbcolor		intens_color;
+	t_color color1;
 
-	intens_color.red = color.red * intens;
-	intens_color.green = color.green * intens;
-	intens_color.blue = color.blue * intens;
-	return (intens_color);
+	color1.red = color.red * intensity;
+	color1.green = color.green * intensity;
+	color1.blue = color.blue * intensity;
+	return (color1);
 }
 
-t_rgbcolor			anglecolor(t_rgbcolor color, t_vector objvector, t_vector rayvector)
+t_color			anglecolor(t_color color, t_vect3 normal, t_vect3 raydir)
 {
-	float			cos;
+	double cos;
 
-	cos = angle2vects(objvector, rayvector);
+	cos = angletwovectors(normal, raydir);
 	if (cos < 0)
-		ft_bzero(&color, sizeof(t_rgbcolor));
+		ft_bzero(&color, sizeof(color));
 	color.red *= cos;
 	color.green *= cos;
 	color.blue *= cos;
 	return (color);
 }
 
-t_rgbcolor			reflectedcolor(t_rgbcolor colorobj, t_rgbcolor lightcolor)
+t_color			reflectedcolor(t_color colorobject, t_color colorlight)
 {
-	t_rgbcolor		refcolor;
+	t_color refcolor;
 
-	refcolor.intens = 0;
-	refcolor.red = (lightcolor.red * colorobj.red) / 255;
-	refcolor.green = (lightcolor.green * colorobj.green) / 255;
-	refcolor.blue = (lightcolor.blue * colorobj.blue) / 255;
+	refcolor.intensity = 0;
+	refcolor.red = (colorlight.red * colorobject.red) / 255;
+	refcolor.green = (colorlight.green * colorobject.green) / 255;
+	refcolor.blue = (colorlight.blue * colorobject.blue) / 255;
 	return (refcolor);
 }
 
-t_rgbcolor			calcolor(t_intersection *intersection, t_ray ray, float intens, t_rgbcolor lightcolor)
+t_color			calccolor(t_intersection *intersection, t_rayo ray, double intesity, t_color colorlight)
 {
-	t_rgbcolor		color;
+	t_color color;
 
-	color = reflectedcolor(intersection->color, lightcolor);
-	color = anglecolor(color, intersection->normalvect, ray.direction);
-	color = intenscolor(color, intens);
+	color = reflectedcolor(intersection->color, colorlight);
+	color = anglecolor(color, intersection->normal, ray.vector);
+	color = intensitycolor(color, intesity);
 	return (color);
 }
 
-t_rgbcolor			ambienlight(t_scene *scene, t_intersection *intersection)
+t_color			ambientlight(t_scene *scene, t_intersection *intersection)
 {
-	t_rgbcolor		am_color;
+	t_color	new_color;
 
-	ft_bzero(&am_color, sizeof(t_rgbcolor));
-	am_color = reflectedcolor(intersection->color, scene->am_light.color);
-	am_color = intenscolor(am_color, scene->am_light.luminosity);
-	return (am_color);
+	ft_bzero(&new_color, sizeof(new_color));
+	new_color = reflectedcolor(intersection->color, scene->env_light.color);
+	new_color = intensitycolor(new_color, scene->env_light.intensity);
+	return (new_color);
 }
 
-t_rgbcolor			addcolor(t_rgbcolor color1, t_rgbcolor color2)
+t_color			addcolor(t_color color1, t_color color2)
 {
-	t_rgbcolor color;
+	t_color color;
 
-	if (color1.intens + color2.intens > 255)
-		color.intens = 255;
+	if (color1.intensity + color2.intensity > 255)
+		color.intensity = 255;
 	else
-		color.intens = color1.intens + color2.intens;
+		color.intensity = color1.intensity + color2.intensity;
 	if (color1.red + color2.red > 255)
 		color.red = 255;
 	else
@@ -89,21 +89,21 @@ t_rgbcolor			addcolor(t_rgbcolor color1, t_rgbcolor color2)
 	return (color);
 }
 
-int					colortoint(t_rgbcolor color)
+unsigned int	colortoint(t_color color)
 {
-	int int_color;
+	unsigned int color_int;
 
-	int_color = 0;
-	int_color += color.red * pow(256,2);
-	int_color += color.green * pow(256, 1);
-	int_color += color.blue;
-	return (int_color);
+	color_int = 0;
+	color_int += color.red * pow(256, 2);
+	color_int += color.green * pow(256, 1);
+	color_int += color.blue;
+	return (color_int);
 }
 
-t_rgbcolor			fusion_colors(t_all_colors colors)
+t_color			fusion_colors(t_colors_reflected colors)
 {
-	t_rgbcolor color;
+	t_color color;
 
-	color = addcolor(colors.color_lights, colors.color_am);
+	color = addcolor(colors.color_ambient, colors.color_lights);
 	return (color);
 }

@@ -3,24 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   generateimagert.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 13:23:17 by jtello-m          #+#    #+#             */
-/*   Updated: 2021/03/16 14:14:41 by jtello-m         ###   ########.fr       */
+/*   Updated: 2021/03/25 02:47:34 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GENERATEIMAGERT_H
 # define GENERATEIMAGERT_H
 # include "../minirt.h"
+# include "bmp/bmp.h"
 
-void				raytracing(t_scene scene, t_libx *libx);
-t_intersection		*primaryray(t_scene *scene, t_ray *ray, int pixelx, int pixely);
-t_rgbcolor			secondaryray(t_scene *scene, t_ray raycam, t_intersection *intersection);
-t_ray				cordtoray(int pixelx, int pixely, t_scene *scene);
-t_intersection		*raycollision(t_list_objects *object, t_ray ray);
-t_ray				raytolight(t_intersection *intersection, t_ray primary, t_light light);
-t_intersection		*returnnear(t_intersection *first, t_intersection *second);
-t_intersection		*behindcam(t_intersection *intersection);
-void				writepixelimg(t_libx *libx, t_rgbcolor color, int x, int y);
+void			generateimage(t_scene scene, t_libx *libx);
+void			inicamera(t_camera *camera, t_resolution resolution);
+t_intersection	*raycollision(t_list_obj *objects, t_rayo ray);
+t_intersection	*primaryray(t_scene *scene, t_rayo *ray, int pixelx, int pixelj);
+t_color			secondaryray(t_scene *scene, t_rayo ray, t_intersection *intersectionobject);
+void			writepixelimage(t_libx *libx, t_color color, int x, int y);
+t_rayo			cordtoray(int i, int j, t_scene *scene);
+t_rayo			raytolight(t_intersection *intersection, t_rayo primary, t_light_point light);
+t_intersection	*returnnear(t_intersection *first, t_intersection *second);
+t_intersection	*infront(t_intersection *intersection);
+int				changecamera(t_scene *scene, int next);
 #endif

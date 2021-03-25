@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 17:59:48 by jtello-m          #+#    #+#             */
-/*   Updated: 2021/03/19 17:45:20 by jtello-m         ###   ########.fr       */
+/*   Updated: 2021/03/25 02:42:29 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 
-int		main(int argc, char **argv)
+int				main(int arg_n, char **arg_s)
 {
-	t_data	sdata;
-	
-	sdata.argfile = readargs(argc, argv);
-	loadscene(&sdata.scene, sdata.argfile.args_file);
-	libx_init(&sdata);
-	raytracing(sdata.scene, &sdata.libx);
-	showimage(&sdata.libx, &sdata.argfile, &sdata.scene);
-	if (sdata.argfile.save_file == NULL)
-		mlx_loop(sdata.libx.mlx);
-	return(0);
+	t_data_struct data;
+
+	data.args = process_args(arg_n, arg_s);
+	loadscene(&data.scene, data.args.file_load);
+	ini_libx(&data);
+	generateimage(data.scene, &data.libx);
+	showscene(&data.libx, &data.args, &data.scene);
+	if (data.args.file_save == NULL)
+		mlx_loop(data.libx.ptr);
+	return (0);
 }

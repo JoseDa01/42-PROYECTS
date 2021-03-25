@@ -3,37 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   ft_libx_init.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 12:13:43 by jtello-m          #+#    #+#             */
-/*   Updated: 2021/03/16 14:13:39 by jtello-m         ###   ########.fr       */
+/*   Updated: 2021/03/25 02:40:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libxrt.h"
 
-int			press_key(int key, t_data *sdata)
+int		key_pressed(int key, t_data_struct *data)
 {
-	(void)sdata;
+	int changed;
+
+	changed = 0;
 	if (key == ESC)
 		exit(0);
-	//falta el salto de camara;
-	return(0);
+	if (key == 123 || key == 124)
+	{
+		if (key == 123)
+			changed = changecamera(&data->scene, 0);
+		else if (key == 124)
+			changed = changecamera(&data->scene, 1);
+		if (changed == 1)
+		{
+			generateimage(data->scene, &data->libx);
+			showscene(&data->libx, &data->args, &data->scene);
+		}
+	}
+	return (0);
 }
 
-int			mouse_hook(int button, int x, int y, t_data libx_param)
+int		mouse_hook(int button, int x, int y, t_libx *param)
 {
-	printf("boton pulsado %i\n", button);
-	printf("Pixel seleccionado : %i x %i\n", x, y);
-	printf("La dirrecion del ptr es : %p\n", libx_param.libx.mlx_win);
-	return(0);
+	printf("button pulsado %d\n", button);
+	printf("pixel selecionado =  %d x %d\n", x, y);
+	printf("direcion a win ptr %p\n", param->win_ptr);
+	return (0);
 }
 
-void		libx_init(t_data *sdata)
+void	ini_libx(t_data_struct *data)
 {
-	sdata->libx.mlx = mlx_init();
-	sdata->libx.mlx_win = mlx_new_window(sdata->libx.mlx, sdata->scene.resolution.x, sdata->scene.resolution.y, "Amazing MiniRT");
-	mlx_do_key_autorepeatoff(sdata->libx.mlx);
-	mlx_hook(sdata->libx.mlx_win, 2, 1, press_key, &sdata->scene);
-	mlx_mouse_hook(sdata->libx.mlx_win, &mouse_hook, &sdata->libx);
-}
+	data->libx.ptr = mlx_init();
+	data->libx.win_ptr = mlx_new_window(data->libx.ptr, data->scene.resolution.x, data->scene.resolution.y, "raytracing majestuoso");
+	mlx_do_key_autorepeatoff(data->libx.ptr);
+	mlx_hook(data->libx.win_ptr, 2, 1, key_pressed, &data->scene);
+	mlx_mouse_hook(data->libx.win_ptr, &mouse_hook, &data->libx);
