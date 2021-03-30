@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   bmp.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/25 02:48:00 by marvin            #+#    #+#             */
-/*   Updated: 2021/03/25 02:48:00 by marvin           ###   ########.fr       */
+/*   Created: 2020/03/03 17:45:47 by gmartine          #+#    #+#             */
+/*   Updated: 2021/03/30 19:06:43 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bmp.h"
 
-t_bmp_file		inibmp(char *name, unsigned short int bitperpixel, t_resolution resolution)
+t_bmp_file	inibmp(char *name, unsigned short int bitperpixel, t_resolution resolution)
 {
-	t_bmp_file image;
+	t_bmp_file	image;
 
 	image.file_name = name;
 	image.magicfile[0] = 0x42;
@@ -39,10 +39,10 @@ t_bmp_file		inibmp(char *name, unsigned short int bitperpixel, t_resolution reso
 	return (image);
 }
 
-void			writebmp(int fd, char *image, t_bmp_file file)
+void	writebmp(int fd, char *image, t_bmp_file file)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	write(fd, &file.magicfile, sizeof(file.magicfile));
 	write(fd, &file.filesize, sizeof(file.filesize));
@@ -71,14 +71,14 @@ void			writebmp(int fd, char *image, t_bmp_file file)
 	}
 }
 
-void			imagetofile(char *rgbmatrix, char *name, t_resolution resolution)
+void	imagetofile(char *rgbmatrix, char *name, t_resolution resolution)
 {
 	int				fd;
 	t_bmp_file		image;
 
 	fd = open(name, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (fd < 0)
-		error("no se ha podido crear la imagen");
+		error(".");
 	image = inibmp(name, 0x18, resolution);
 	writebmp(fd, rgbmatrix, image);
 	close(fd);

@@ -1,20 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bmp.h                                              :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/04 20:31:34 by gmartine          #+#    #+#             */
-/*   Updated: 2021/03/30 18:39:05 by jtello-m         ###   ########.fr       */
+/*   Created: 2019/11/11 20:47:55 by gmartine          #+#    #+#             */
+/*   Updated: 2021/03/30 18:38:07 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BMP_H
-# define BMP_H
-# include "../generateimage.h"
+#include "libft.h"
 
-t_bmp_file		inibmp(char *name, unsigned short int bitperpixel, t_resolution resolution);
-void			writebmp(int fd, char *image, t_bmp_file file);
-void			imagetofile(char *rgbmatrix, char *name, t_resolution resolution);
-#endif
+void	ft_putnbr_fd(int nb, int fd)
+{
+	char aux;
+
+	if (nb == -2147483648)
+	{
+		write(fd, "-2", 2);
+		nb = 147483648;
+	}
+	if (nb < 0)
+	{
+		write(fd, "-", 1);
+		nb = -nb;
+	}
+	if (nb <= 9)
+	{
+		aux = nb + '0';
+		write(fd, &aux, 1);
+	}
+	else
+	{
+		aux = (nb % 10) + '0';
+		nb = nb / 10;
+		ft_putnbr_fd(nb, fd);
+		write(fd, &aux, 1);
+	}
+}

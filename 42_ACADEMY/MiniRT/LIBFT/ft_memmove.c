@@ -1,20 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bmp.h                                              :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/04 20:31:34 by gmartine          #+#    #+#             */
-/*   Updated: 2021/03/30 18:39:05 by jtello-m         ###   ########.fr       */
+/*   Created: 2019/11/16 17:34:16 by gmartine          #+#    #+#             */
+/*   Updated: 2021/03/30 18:38:04 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BMP_H
-# define BMP_H
-# include "../generateimage.h"
+#include "libft.h"
 
-t_bmp_file		inibmp(char *name, unsigned short int bitperpixel, t_resolution resolution);
-void			writebmp(int fd, char *image, t_bmp_file file);
-void			imagetofile(char *rgbmatrix, char *name, t_resolution resolution);
-#endif
+void	*ft_memmove(void *dst, const void *src, size_t len)
+{
+	const char	*f;
+	char		*t;
+
+	f = src;
+	t = dst;
+	if ((f != NULL || t != NULL) && len != 0)
+	{
+		if (f < t)
+		{
+			f += len;
+			t += len;
+			while (len-- > 0)
+				*(--t) = *(--f);
+		}
+		else
+			while (len-- > 0)
+				*t++ = *f++;
+	}
+	return (dst);
+}

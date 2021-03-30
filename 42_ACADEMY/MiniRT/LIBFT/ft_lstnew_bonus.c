@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bmp.h                                              :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/04 20:31:34 by gmartine          #+#    #+#             */
-/*   Updated: 2021/03/30 18:39:05 by jtello-m         ###   ########.fr       */
+/*   Created: 2019/11/11 22:38:33 by gmartine          #+#    #+#             */
+/*   Updated: 2021/03/30 18:38:00 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BMP_H
-# define BMP_H
-# include "../generateimage.h"
+#include "libft.h"
 
-t_bmp_file		inibmp(char *name, unsigned short int bitperpixel, t_resolution resolution);
-void			writebmp(int fd, char *image, t_bmp_file file);
-void			imagetofile(char *rgbmatrix, char *name, t_resolution resolution);
-#endif
+t_list		*ft_lstnew(void const *content)
+{
+	t_list *ptr;
+
+	ptr = malloc(sizeof(t_list));
+	if (ptr != NULL)
+	{
+		ptr->content = (void *)content;
+		ptr->next = NULL;
+	}
+	return (ptr);
+}

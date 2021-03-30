@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bmp.h                                              :+:      :+:    :+:   */
+/*   libx.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/04 20:31:34 by gmartine          #+#    #+#             */
-/*   Updated: 2021/03/30 18:39:05 by jtello-m         ###   ########.fr       */
+/*   Created: 2020/03/05 00:13:17 by gmartine          #+#    #+#             */
+/*   Updated: 2021/03/29 20:00:31 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BMP_H
-# define BMP_H
-# include "../generateimage.h"
+#include "generateimage.h"
 
-t_bmp_file		inibmp(char *name, unsigned short int bitperpixel, t_resolution resolution);
-void			writebmp(int fd, char *image, t_bmp_file file);
-void			imagetofile(char *rgbmatrix, char *name, t_resolution resolution);
-#endif
+int	esc_hook(int button, void *x)
+{
+	if (button == ESC)
+		exit(1);
+	x = (void *) 0x10;
+	return (0);
+}

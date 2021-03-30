@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bmp.h                                              :+:      :+:    :+:   */
+/*   arguments.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jtello-m <jtello-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/04 20:31:34 by gmartine          #+#    #+#             */
-/*   Updated: 2021/03/30 18:39:05 by jtello-m         ###   ########.fr       */
+/*   Created: 2020/03/04 20:56:41 by gmartine          #+#    #+#             */
+/*   Updated: 2021/03/30 18:46:41 by jtello-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BMP_H
-# define BMP_H
-# include "../generateimage.h"
+#ifndef ARGUMENTS_H
+# define ARGUMENTS_H
+# include "../header.h"
 
-t_bmp_file		inibmp(char *name, unsigned short int bitperpixel, t_resolution resolution);
-void			writebmp(int fd, char *image, t_bmp_file file);
-void			imagetofile(char *rgbmatrix, char *name, t_resolution resolution);
+t_arg			process_args(int arg_n, char **arg_s);
+
 #endif
